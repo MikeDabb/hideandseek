@@ -13,7 +13,12 @@ public class TowerLightControl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "PlayerOne" && Input.GetKey(KeyCode.Space))
         {
             thirdPersonCamera.enabled = false;
             firstPersonFlashLightCamera.enabled = true;
@@ -28,8 +33,5 @@ public class TowerLightControl : MonoBehaviour
             thirdPersonCamera.enabled = true;
             firstPersonFlashLightCamera.enabled = false;
         }
-        
-
-        
     }
 }
