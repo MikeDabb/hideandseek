@@ -26,8 +26,9 @@ public class Movement : MonoBehaviour
         //Debug.Log(moveVertical);
 
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
-        transform.Rotate(0, moveHorizontal * Time.deltaTime * rotationSpeed, 0);
+        //transform.Rotate(0, moveHorizontal * Time.deltaTime * rotationSpeed, 0);
         transform.Translate(0, 0, moveVertical * Time.deltaTime * movementSpeed);
+        transform.Translate(moveHorizontal, 0, 0  * Time.deltaTime * movementSpeed);
 
         if (moveVertical > 0)
         {

@@ -11,7 +11,7 @@ public class ChangeCamera : MonoBehaviour
     public void ShowThirdPersonView()
     {
         thirdPersonCamera.enabled = true;
-
+            
         minimapCamera.enabled = false;
     }
 
