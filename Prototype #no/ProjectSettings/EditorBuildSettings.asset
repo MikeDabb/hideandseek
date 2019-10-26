@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/MainMenu.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/HideAndSeek.unity
     guid: 0dab9e0ef398df8419d0c6ee1f4f7958
+  - enabled: 1
+    path: Assets/Scenes/TowerScene.unity
+    guid: f44620a59f3c43949bd41937bd1360ea
   m_configObjects: {}

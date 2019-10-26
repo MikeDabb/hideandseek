@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        MoveCameraWithMouse();
+        //MoveCameraWithMouse();
     }
 
     private void MoveCameraWithMouse()
