@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/HideAndSeek.unity
     guid: 0dab9e0ef398df8419d0c6ee1f4f7958
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TowerScene.unity
     guid: f44620a59f3c43949bd41937bd1360ea
+  - enabled: 1
+    path: Assets/Scenes/TowerWithBuildings.unity
+    guid: cee8668865bb976458a36d604afe9787
   m_configObjects: {}
