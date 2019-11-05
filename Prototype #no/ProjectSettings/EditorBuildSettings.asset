@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TowerScene.unity
     guid: f44620a59f3c43949bd41937bd1360ea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TowerWithBuildings.unity
     guid: cee8668865bb976458a36d604afe9787
+  - enabled: 1
+    path: Assets/Scenes/HideAndLight.unity
+    guid: f3622f1a24d353040ad42c96d7b5be13
   m_configObjects: {}

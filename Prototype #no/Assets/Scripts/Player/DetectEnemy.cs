@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 public class DetectEnemy : MonoBehaviour
 {
 
-    public GameObject playerWonUI;
+    public GameObject playerTwo;
+    public Material playerTwoMaterial;
 
-    // Start is called before the first frame update
     void Start()
     {
-        GameObject playerWonUI = GetComponent<GameObject>();
+        GameObject playerTwo = GetComponent<GameObject>();
+        Material playerTwoMaterial = GetComponent<Material>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -23,8 +21,8 @@ public class DetectEnemy : MonoBehaviour
     {
         if (other.gameObject.tag == "PlayerTwo")
         {
-            playerWonUI.SetActive(true);
             Debug.Log("Player one wins!");
+            playerTwoMaterial.EnableKeyword("_EMISSION");
         }
     }
 }
