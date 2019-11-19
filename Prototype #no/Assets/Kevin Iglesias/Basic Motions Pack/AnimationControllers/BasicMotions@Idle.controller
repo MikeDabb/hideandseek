@@ -10,6 +10,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsSprinting
+    m_EventTreshold: 6
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsRunning
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 208148082505446847}
@@ -36,6 +39,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsRunningBackwards
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsRunning
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5931933033864130079}
   m_Solo: 0
@@ -58,11 +64,14 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsRunning
+    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: IsRunningBackwards
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: IsRunning
+    m_ConditionEvent: IsSprinting
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5931933033864130079}
@@ -88,7 +97,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: IsRunningBackwards
-    m_EventTreshold: 0
+    m_EventTreshold: 0.1
   - m_ConditionMode: 2
     m_ConditionEvent: IsRunning
     m_EventTreshold: 0
@@ -116,7 +125,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: IsRunning
-    m_EventTreshold: 0
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102698040993713290}
   m_Solo: 0
@@ -160,6 +169,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: IsRunningBackwards
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Speed
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -215,6 +230,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: IsRunning
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsRunningBackwards
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8325303191619054945}
@@ -291,16 +309,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102698040993713290}
-    m_Position: {x: 310, y: -120, z: 0}
+    m_Position: {x: 410, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5931933033864130079}
-    m_Position: {x: 670, y: 50, z: 0}
+    m_Position: {x: 100, y: -190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 208148082505446847}
-    m_Position: {x: 10, y: 260, z: 0}
+    m_Position: {x: 990, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8325303191619054945}
-    m_Position: {x: 310, y: 50, z: 0}
+    m_Position: {x: 690, y: -190, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -341,12 +359,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsSprinting
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsRunning
-    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Speed
+    m_EventTreshold: 6
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8325303191619054945}
   m_Solo: 0
@@ -398,11 +413,11 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsSprinting
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: IsRunning
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsSprinting
+    m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102698040993713290}
   m_Solo: 0

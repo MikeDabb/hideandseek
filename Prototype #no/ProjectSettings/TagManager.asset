@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerTwo
   - PlayerOne
+  - Flashlight
   layers:
   - Default
   - TransparentFX

@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Material))]
 public class DetectEnemy : MonoBehaviour
 {
-
-    public GameObject playerTwo;
     public Material playerTwoMaterial;
+
+    public bool isPlayerTwoSeen;
 
     void Start()
     {
-        GameObject playerTwo = GetComponent<GameObject>();
         Material playerTwoMaterial = GetComponent<Material>();
     }
 
@@ -22,7 +22,12 @@ public class DetectEnemy : MonoBehaviour
         if (other.gameObject.tag == "PlayerTwo")
         {
             Debug.Log("Player one wins!");
-            playerTwoMaterial.EnableKeyword("_EMISSION");
+            EnableEmissionOnPlayerTwoMaterial();
         }
+    }
+
+    public void EnableEmissionOnPlayerTwoMaterial()
+    {
+        playerTwoMaterial.EnableKeyword("_EMISSION");
     }
 }

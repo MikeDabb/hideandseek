@@ -1,9 +1,18 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PhotonView))]
 public class Movement : MonoBehaviour
 {
     public Rigidbody rb;
     public Animator anim;
+    private PhotonView photonView;
+
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
+
     public float movementSpeed;
     public float strafeSpeed;
     public float rotationSpeed = 200.0f;
@@ -19,6 +28,7 @@ public class Movement : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         Transform transform = GetComponent<Transform>();
         Animator anim = GetComponent<Animator>();
+        photonView = GetComponent<PhotonView>();
     }
 
     void FixedUpdate()
@@ -26,8 +36,26 @@ public class Movement : MonoBehaviour
         MovePlayerOnInput();
     }
 
+    private void Awake()
+    {
+        //// #Important
+        //// used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        //if (photonView.IsMine)
+        //{
+        //    Movement.LocalPlayerInstance = this.gameObject;
+        //}
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void MovePlayerOnInput()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         //Debug.Log(moveVertical);
@@ -47,10 +75,16 @@ public class Movement : MonoBehaviour
             anim.SetBool("IsRunning", true);
         }
 
-        if (moveVertical < 0.2 && moveVertical > 0)
+        if (moveHorizontal != 0)
+        {
+            anim.SetBool("IsRunning", true);
+        }
+
+        if (moveVertical < 0.2 && moveVertical > 0 && moveHorizontal == 0)
         {
             anim.SetBool("IsRunning", false);
         }
+
 
         if ( moveVertical > 0 && Input.GetKey(KeyCode.LeftShift))
         {
