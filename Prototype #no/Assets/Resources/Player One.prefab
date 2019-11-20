@@ -1275,10 +1275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c282ea72c43732418db152654b7a0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7
-  height: 3
+  distance: 3
+  height: 1
   heightSmoothLag: 0.3
-  centerOffset: {x: 0, y: 0, z: 0}
+  centerOffset: {x: 0, y: 2.07, z: 0}
   followOnStart: 0
 --- !u!114 &7117673782452974843
 MonoBehaviour:

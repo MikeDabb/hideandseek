@@ -18,7 +18,7 @@ public class DetectPlayerWithLaser : MonoBehaviour
     void Update()
     {
         LightOnDetection();
-        ResetCameraLightAfter5Seconds();
+        //ResetCameraLightAfter5Seconds();
     }
 
     private void LightOnDetection()
@@ -27,7 +27,9 @@ public class DetectPlayerWithLaser : MonoBehaviour
         {
             EnableCameraLight();
             EnableEmissionOnPlayerTwoMaterial();
+            isPlayerTwoSeen = false;
         }
+
     }
 
     private void EnableCameraLight()
@@ -36,10 +38,10 @@ public class DetectPlayerWithLaser : MonoBehaviour
         Debug.Log("Player Two has been spotted");
     }
 
-    private void ResetCameraLightAfter5Seconds()
-    {
-        StartCoroutine(DisableLightAfterTime(.5f));
-    }
+    //private void ResetCameraLightAfter5Seconds()
+    //{
+    //    StartCoroutine(DisableLightAfterTime(5f));
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,11 +49,11 @@ public class DetectPlayerWithLaser : MonoBehaviour
             isPlayerTwoSeen = true;
     }
 
-    private IEnumerator DisableLightAfterTime(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        cameraLight.SetActive(false);
-    }
+    //private IEnumerator DisableLightAfterTime(float seconds)
+    //{
+    //    yield return new WaitForSeconds(seconds);
+    //    cameraLight.SetActive(false);
+    //}
 
     private void EnableEmissionOnPlayerTwoMaterial()
     {
