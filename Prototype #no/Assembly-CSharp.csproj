@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Pun\PlayerNameInputField.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerLightControl.cs" />
     <Compile Include="Assets\Scripts\Traps\Laser &amp; CameraLight\DetectPlayerWithLaser.cs" />
+    <Compile Include="Assets\Scripts\UI\DisplayNumberOfPlayersInRoom.cs" />
     <Compile Include="Assets\Scripts\UI\DisplayPlayerOneBatteryHealth.cs" />
     <Compile Include="Assets\Scripts\UI\Timer.cs" />
     <Compile Include="Assets\VLights\Scripts\Demo\MouseOrbitDemo.cs" />

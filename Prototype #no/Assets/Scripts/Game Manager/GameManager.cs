@@ -3,14 +3,13 @@ using UnityEngine.SceneManagement;
 
 using Photon.Pun;
 using Photon.Realtime;
-
-
+using System.Collections;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Public Fields
     [Tooltip("The prefab to use for instantiating player")]
-    public GameObject playerPrefab;
+    public GameObject playerOnePrefab;
 
     [Tooltip("Material to use for emission checking (meaning that the player was spotted)")]
     public Material playerTwoMaterial;
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void Start()
     {
         DisableGameFinishedUI();
-        if (playerPrefab == null)
+        if (playerOnePrefab == null)
         {
             Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
         }
@@ -65,7 +64,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(playerOnePrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            
         }
         else
         {
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void Update()
     {
         FinishGameAfterPlayerTwoIsSpotted();
+        DisplayPlayersCurrentlyInRoom();
     }
     #endregion
 
@@ -98,17 +99,28 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
+    // changes emission to true for material used by player two, which results in player two being lighted up
     private void FinishGameAfterPlayerTwoIsSpotted()
     {
         if (playerTwoMaterial.IsKeywordEnabled("_EMISSION"))
         {
             gameFinishedUI.SetActive(true);
+            playerTwoMaterial.DisableKeyword("_EMISSION");
         }
     }
 
+    // makes sure UI text for finished game is not displayed at the beggining of the game
     private void DisableGameFinishedUI()
     {
         gameFinishedUI.SetActive(false);
     }
+
+    private void DisplayPlayersCurrentlyInRoom()
+    {
+        Debug.Log("Count Rooms:" + PhotonNetwork.CountOfRooms);
+        Debug.Log("Count Of Players In Rooms:" + PhotonNetwork.CountOfPlayersInRooms);
+    }
     #endregion
+
+
 }

@@ -8,7 +8,7 @@ public class DisplayPlayerOneBatteryHealth : MonoBehaviour
     void Start()
     {
         string batteryHealthValue = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>().batteryHealthValue.ToString();
-        BatteryHealthText.text = batteryHealthValue;
+        BatteryHealthText.text = string.Format("Battery left: {0} %", batteryHealthValue);
     }
 
     // Update is called once per frame
@@ -16,5 +16,6 @@ public class DisplayPlayerOneBatteryHealth : MonoBehaviour
     {
         string batteryHealthValue = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>().batteryHealthValue.ToString();
         BatteryHealthText.text = string.Format("Battery left: {0} %", batteryHealthValue);
+
     }
 }

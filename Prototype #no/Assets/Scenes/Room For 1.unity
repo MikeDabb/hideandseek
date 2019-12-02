@@ -1410,6 +1410,12 @@ PrefabInstance:
       propertyPath: playerTwoMaterial
       value: 
       objectReference: {fileID: 2100000, guid: b819300a0d363f6469150561f4093349, type: 2}
+    - target: {fileID: 7102783570060629963, guid: f214d09fa3c33dc4aa4d2765d9e738b1,
+        type: 3}
+      propertyPath: playerOnePrefab
+      value: 
+      objectReference: {fileID: 5037522819548784940, guid: affeeae41b27b1342ad4f95fe593161a,
+        type: 3}
     - target: {fileID: 7102783570060629960, guid: f214d09fa3c33dc4aa4d2765d9e738b1,
         type: 3}
       propertyPath: m_LocalPosition.x

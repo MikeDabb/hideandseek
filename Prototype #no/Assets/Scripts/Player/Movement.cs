@@ -8,9 +8,9 @@ public class Movement : MonoBehaviour
 {
     public Rigidbody rb;
     public Animator anim;
-    private PhotonView photonView;
+    public PhotonView photonView;
 
-    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    //[Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
     public float movementSpeed;
@@ -23,12 +23,14 @@ public class Movement : MonoBehaviour
     private float yaw = 0.0f;
     private float pitch = 0.0f;
 
+
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         Transform transform = GetComponent<Transform>();
         Animator anim = GetComponent<Animator>();
         photonView = GetComponent<PhotonView>();
+        LocalPlayerInstance = GetComponent<GameObject>();
     }
 
     void FixedUpdate()
@@ -38,15 +40,15 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-        //// #Important
-        //// used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
-        //if (photonView.IsMine)
-        //{
-        //    Movement.LocalPlayerInstance = this.gameObject;
-        //}
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = gameObject;
+        }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void MovePlayerOnInput()
