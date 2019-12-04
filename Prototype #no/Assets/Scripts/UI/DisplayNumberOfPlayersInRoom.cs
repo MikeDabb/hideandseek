@@ -19,6 +19,6 @@ public class DisplayNumberOfPlayersInRoom : MonoBehaviour
     private void DisplayNumberOfPlayersCurrentlyInRoom()
     {
         Debug.Log("Count Of Players In Rooms: " + PhotonNetwork.PlayerList.Length);
-        numberOfPlayersText.text = string.Format("Count Of Players In Rooms: {0} ",PhotonNetwork.PlayerList.Length);
+        numberOfPlayersText.text = string.Format("Count Of Players In Rooms: {0} ", PhotonNetwork.PlayerList.Length);
     }
 }

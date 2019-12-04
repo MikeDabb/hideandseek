@@ -8,8 +8,11 @@ using System.Collections;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Public Fields
-    [Tooltip("The prefab to use for instantiating player")]
+    [Tooltip("The prefab to use for instantiating Player One")]
     public GameObject playerOnePrefab;
+
+    [Tooltip("The pregab to use for instantiating Player Two")]
+    public GameObject playerTwoPrefab;
 
     [Tooltip("Material to use for emission checking (meaning that the player was spotted)")]
     public Material playerTwoMaterial;
@@ -55,22 +58,24 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void Start()
     {
         DisableGameFinishedUI();
+        playerTwoMaterial.DisableKeyword("_EMISSION");
         if (playerOnePrefab == null)
         {
             Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
         }
 
-        if (Movement.LocalPlayerInstance == null)
-        {
-            Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-            // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            PhotonNetwork.Instantiate(playerOnePrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-            
-        }
-        else
-        {
-            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-        }
+        InstantiatePlayer();
+        //if (Movement.LocalPlayerInstance == null)
+        //{
+        //    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+        //    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+        //    PhotonNetwork.Instantiate(playerOnePrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+
+        //}
+        //else
+        //{
+        //    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+        //}
     }
 
     public void Update()
@@ -105,7 +110,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (playerTwoMaterial.IsKeywordEnabled("_EMISSION"))
         {
             gameFinishedUI.SetActive(true);
-            playerTwoMaterial.DisableKeyword("_EMISSION");
         }
     }
 
@@ -119,6 +123,30 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Count Rooms:" + PhotonNetwork.CountOfRooms);
         Debug.Log("Count Of Players In Rooms:" + PhotonNetwork.CountOfPlayersInRooms);
+    }
+
+    private void InstantiatePlayer()
+    {
+        // make sure that local player is not yet instantiated and check for players count (if 1 then PlayerOne, if 2 then PlayerTwo)
+        if (Movement.LocalPlayerInstance == null)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                PhotonNetwork.Instantiate(playerOnePrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            }
+            else
+            {
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                PhotonNetwork.Instantiate(playerTwoPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+            }
+        }
+        else
+        {
+            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+        }
     }
     #endregion
 

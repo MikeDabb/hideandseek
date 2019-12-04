@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-public class PowerUpController : MonoBehaviour
+public class FlashlightPowerUpController : MonoBehaviour
 {
     private Transform transform;
     private readonly float rotationSpeed = 150f;
+    
 
     void Start()
     {
-        transform = GetComponent<Transform>();    
+        transform = GetComponent<Transform>();
     }
 
     void Update()
     {
         RotateBox();
-
     }
 
     private void RotateBox()
@@ -25,7 +25,14 @@ public class PowerUpController : MonoBehaviour
     {
         if (other.tag == "PlayerOne")
         {
+            RestoreBatteryLight();
             Destroy(transform.gameObject);
         }
+    }
+
+    private void RestoreBatteryLight()
+    {
+        var flashlightBattery = GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Flashlight>().batteryHealthValue;
+        flashlightBattery += 30.0f;
     }
 }

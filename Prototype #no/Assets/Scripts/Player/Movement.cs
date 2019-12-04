@@ -44,11 +44,11 @@ public class Movement : MonoBehaviour
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine)
         {
-            LocalPlayerInstance = gameObject;
+            LocalPlayerInstance = this.gameObject;
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(this.gameObject); commented out for the reason of duplicated players when opening rooms for 2 players
     }
 
     private void MovePlayerOnInput()
@@ -68,9 +68,10 @@ public class Movement : MonoBehaviour
         transform.Translate(moveHorizontal * Time.deltaTime * strafeSpeed, 0, 0);
 
         yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
+        //add pitch if want to add Y axis mouse movement
+        //pitch -= speedV * Input.GetAxis("Mouse Y");
 
-        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
 
         if (moveVertical > 0)
         {
